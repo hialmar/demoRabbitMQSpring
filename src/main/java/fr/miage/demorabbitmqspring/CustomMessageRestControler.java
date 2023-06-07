@@ -1,9 +1,6 @@
 package fr.miage.demorabbitmqspring;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/CustomMessage")
@@ -16,9 +13,11 @@ public class CustomMessageRestControler {
     }
 
     @PostMapping
-    public CustomMessage createCustomMessage(@RequestBody CustomMessage customMessage) {
+    public CustomMessage createCustomMessage(@RequestBody CustomMessage customMessage,
+                                             @RequestParam(name = "routingKey", defaultValue = "foo.bar.baz") String routingKey,
+                                             @RequestParam(name = "barHeader", defaultValue = "baz") String barHeader) {
         System.out.println("Post de "+customMessage);
-        sender.sendMessage(customMessage, "foo.bar.baz", "baz");
+        sender.sendMessage(customMessage, routingKey, barHeader);
         System.out.println("Sent...");
         return customMessage;
     }

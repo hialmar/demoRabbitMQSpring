@@ -1,13 +1,9 @@
 package fr.miage.demorabbitmqspring;
 
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class CustomMessage implements Serializable {
-    @JsonProperty("text") String text;
-    @JsonProperty("priority") int priority;
-    @JsonProperty("secret") boolean secret;
+public class CustomMessage {
+    private String text;
+    private int priority;
+    private boolean secret;
 
     public CustomMessage() {
     }
